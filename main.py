@@ -109,21 +109,21 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     ### ANALYZE IMAGE USING XML COUNTS ###
-    parser.add_argument('-x', '--xml_path', required=True, type=str)
-    parser.add_argument('-i', '--image_path', required=True, type=str)
-    parser.add_argument('-m', '--marker_names', required=True, nargs='+')
-    parser.add_argument('-s', '--syfp_channel', default=1, type=int)
-    parser.add_argument('-b', '--box_size', default=3, type=int)
-    parser.add_argument('-pkl', '--save_pickle', default=False, type=bool)
+    parser.add_argument('-x', '--xml_path', required=True, type=str, help='Path to CellCounter .xml file')
+    parser.add_argument('-i', '--image_path', required=True, type=str, help='Path to multichannel .tif file')
+    parser.add_argument('-m', '--marker_names', required=True, nargs='+', help='Names for each marker type, separated by a space')
+    parser.add_argument('-s', '--syfp_channel', default=1, type=int, help='Channel number for vector (zero indexed)')
+    parser.add_argument('-b', '--box_size', default=3, type=int, help='Size of grid used to measure vector expression level')
+    parser.add_argument('-pkl', '--save_pickle', default=False, type=bool, help='True-False: save mesurements to .pkl file')
 
     ### MAKING A FIGURE ###
-    parser.add_argument('-fig', '--make_fig', default=True, type=bool)
-    parser.add_argument('-c', '--colors', default=['#2bfa05', '#fb04e9', '#ecf807', '#e32400', '#fec700'], nargs='+')
-    parser.add_argument('-dc', '--display_channel', default=1, type=int)
-    parser.add_argument('-tl', '--threshold_low', default=0, type=int)
-    parser.add_argument('-th', '--threshold_high', default=255, type=int)
-    parser.add_argument('-dot', '--fig_dot_size', default=10, type=int)
-    parser.add_argument('-save', '--save_fig_path', default='./figure.png', type=str)
+    parser.add_argument('-fig', '--make_fig', default=True, type=bool, help='Would you like to make a figure? True-False')
+    parser.add_argument('-c', '--colors', default=['#2bfa05', '#fb04e9', '#ecf807', '#e32400', '#fec700'], nargs='+', help='Color for each marker separated by a space')
+    parser.add_argument('-dc', '--display_channel', default=1, type=int, help='Channel# to display with markers on top (zero indexed)')
+    parser.add_argument('-tl', '--threshold_low', default=0, type=int, help='Set the threshold for dimmest vector')
+    parser.add_argument('-th', '--threshold_high', default=255, type=int, help='Set threshold for brightest vector')
+    parser.add_argument('-dot', '--fig_dot_size', default=10, type=int, help='Size of dot to display on image')
+    parser.add_argument('-save', '--save_fig_path', default='./figure.png', type=str, help='Path to save the figure')
 
 
     args = parser.parse_args()
