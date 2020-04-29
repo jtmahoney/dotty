@@ -51,15 +51,15 @@ def plot_hist_img(data_table,color_dictionary,limits,full_image,display_channel,
 
     ### PLOT THE HISTOGRAM ###
     ax0 = fig.add_subplot(gs[0,0])
-    ax0.set_title('Intensity Histogram')
-    ax0.set_ylabel('n cells/bin')
-    ax0.set_xlabel('ave. pixel value')
+    ax0.set_title('Intensity Histogram (filtered to n=%s)'%df.shape[0], fontsize=20)
+    ax0.set_ylabel('n cells/bin', fontsize=10)
+    ax0.set_xlabel('ave. pixel value', fontsize=10)
     ax0.hist(df['intensity_value'], bins=int(((limits[1]-limits[0])/20)))
     ax0.set_xlim(0,255)
     
     ### PLOT THE IMAGE ###
     ax1 = fig.add_subplot(gs[0:,1:])
-    ax1.set_title('Dot Overlay Image')
+    ax1.set_title('Dot Overlay Image (filtered to n=%s)'%df.shape[0], fontsize=20)
     ax1.imshow(full_image[display_channel])
     for index,row in df.iterrows():
         c = color_dictionary[row['marker_type']]
@@ -76,9 +76,9 @@ def plot_hist_img(data_table,color_dictionary,limits,full_image,display_channel,
             count_over_v=dfmark[dfmark.intensity_value >= v]
             marker_array[mr,v]=len(count_over_v.index)
     axCo = fig.add_subplot(gs[1,0])
-    axCo.set_title('Cells Over Threshold')
-    axCo.set_ylabel('n cells/subtype')
-    axCo.set_xlabel('ave. pixel value')
+    axCo.set_title('Cell Type Intensity (all)', fontsize=20)
+    axCo.set_ylabel('n cells/subtype', fontsize=10)
+    axCo.set_xlabel('ave. pixel value', fontsize=10)
     for mr in range(len(markers)):
         colorCo = color_dictionary[markers[mr]]
         axCo.plot(marker_array[mr,:], colorCo)
@@ -96,7 +96,7 @@ def plot_hist_img(data_table,color_dictionary,limits,full_image,display_channel,
         kcirc = Circle((1,ypos),0.2,color=color_dictionary[ke])
         axKey.add_patch(kcirc)
         text_string = '{} ( {} )'.format(ke,va)
-        ktext = axKey.text(2,ypos,text_string,fontsize=10)
+        ktext = axKey.text(2,ypos,text_string,fontsize=18)
         ypos=ypos-1
     
     return(fig)
